@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MedCap Dashboard</title>
+
+    <!-- PWA icon and manifest -->
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icon-512.png" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="report-frame" allowfullscreen></iframe>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get("id") || "WRQZ"; // 默认值
+
+      const embedUrl =
+        "https://lookerstudio.google.com/embed/reporting/0fa7e8aa-b845-43fb-bbc2-5c7d7f17abb4/page/p_w6xz5twzod?params=%7B%22df531%22:%22include%E0%80%800%E0%80%80IN%E0%80%80" +
+        userId +
+        "%22%7D";
+
+      document.getElementById("report-frame").src = embedUrl;
+    </script>
+  </body>
+</html>
