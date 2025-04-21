@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MedCap Dashboard</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-512.png" />
+  <title>MedCap Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    iframe {
+      width: 100%;
+      height: 100vh;
+      border: none;
+    }
+    .error {
+      padding: 2rem;
+      color: darkred;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
 
-    <!-- PWA icon and manifest -->
-    <link rel="manifest" href="manifest.json" />
-    <link rel="apple-touch-icon" href="icon-512.png" />
-    <meta name="theme-color" content="#ffffff" />
+    const dashboards = {
+      WRQZ: "https://lookerstudio.google.com/embed/reporting/ec9f6aa1-c415-4595-8617-2fb037fcbcb0/page/p_bltj5dvutd",
+      ABCD: "https://lookerstudio.google.com/embed/reporting/ddb3c2f8-8519-4951-afdd-2bcc2b77877f/page/p_bltj5dvutd"
+    };
 
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow: hidden;
-      }
-      iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-      }
-    </style>
-  </head>
-  <body>
-    <iframe id="report-frame" allowfullscreen></iframe>
+    const reportUrl = dashboards[id];
 
-    <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const userId = urlParams.get("id") || "WRQZ"; // 默认值
-
-      const embedUrl =
-        "https://lookerstudio.google.com/embed/reporting/323da50a-7fff-4715-9bfe-f0c75caf1740/page/p_us5ojyo0hd";
-
-      document.getElementById("report-frame").src = embedUrl;
-    </script>
-  </body>
+    if (reportUrl) {
+      document.write(`<iframe src="${reportUrl}"></iframe>`);
+    } else {
+      document.write(`<div class="error">No dashboard found for ID "${id}".</div>`);
+    }
+  </script>
+</body>
 </html>
